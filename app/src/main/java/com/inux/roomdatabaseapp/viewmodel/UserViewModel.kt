@@ -1,15 +1,17 @@
-package com.inux.roomdatabaseapp.data.user
+package com.inux.roomdatabaseapp.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.inux.roomdatabaseapp.data.user.UserDatabase
+import com.inux.roomdatabaseapp.repository.UserRepository
+import com.inux.roomdatabaseapp.model.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class UserViewModel(application: Application): AndroidViewModel(application) {
-    private val readAllData: LiveData<List<User>>
-    private lateinit var readData: LiveData<User>
+    val readAllData: LiveData<List<User>>
     private val repository: UserRepository
 
     init {
@@ -24,7 +26,7 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
-    fun readUser(idTable: Int){
-        readData = repository.readData(idTable)
+    fun readUser(idTable: Int) : LiveData<User>{
+        return repository.readData(idTable)
     }
 }

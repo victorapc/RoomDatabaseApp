@@ -11,8 +11,8 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.inux.roomdatabaseapp.R
-import com.inux.roomdatabaseapp.data.user.User
-import com.inux.roomdatabaseapp.data.user.UserViewModel
+import com.inux.roomdatabaseapp.model.User
+import com.inux.roomdatabaseapp.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.fragment_add.*
 import kotlinx.android.synthetic.main.fragment_add.view.*
 
@@ -37,8 +37,8 @@ class AddFragment : Fragment() {
     }
 
     private fun insertDataToDatabase() {
-        val primeiroNome = addPrimeiroNome_Et.text.toString()
-        val sobrenome = addSobrenome_Et.text.toString()
+        val primeiroNome = updatePrimeiroNome_Et.text.toString()
+        val sobrenome = updateSobrenome_Et.text.toString()
         val idade = addIdade_Et.text
 
         if(inputCkeck(primeiroNome, sobrenome, idade)){

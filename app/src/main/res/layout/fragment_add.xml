@@ -8,7 +8,7 @@
     tools:context=".fragments.add.AddFragment">
 
     <EditText
-        android:id="@+id/addPrimeiroNome_Et"
+        android:id="@+id/updatePrimeiroNome_Et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
@@ -17,20 +17,22 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+    />
 
     <EditText
-        android:id="@+id/addSobrenome_Et"
+        android:id="@+id/updateSobrenome_Et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
         android:layout_marginTop="16dp"
         android:hint="Sobrenome"
-        app:layout_constraintTop_toBottomOf="@+id/addPrimeiroNome_Et"
+        app:layout_constraintTop_toBottomOf="@+id/updatePrimeiroNome_Et"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteX="100dp" />
+        tools:layout_editor_absoluteX="100dp"
+    />
 
     <EditText
         android:id="@+id/addIdade_Et"
@@ -40,10 +42,11 @@
         android:inputType="number"
         android:layout_marginTop="16dp"
         android:hint="Idade"
-        app:layout_constraintTop_toBottomOf="@+id/addSobrenome_Et"
+        app:layout_constraintTop_toBottomOf="@+id/updateSobrenome_Et"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteX="100dp" />
+        tools:layout_editor_absoluteX="100dp"
+    />
 
     <Button
         android:id="@+id/add_btn"
@@ -54,5 +57,6 @@
         app:layout_constraintTop_toBottomOf="@+id/addIdade_Et"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteX="135dp" />
+        tools:layout_editor_absoluteX="135dp"
+    />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,8 @@
-package com.inux.roomdatabaseapp.data.user
+package com.inux.roomdatabaseapp.repository
 
 import androidx.lifecycle.LiveData
+import com.inux.roomdatabaseapp.data.user.UserDao
+import com.inux.roomdatabaseapp.model.User
 
 class UserRepository(private val userDao: UserDao) {
     val readAllData: LiveData<List<User>> = userDao.readAllData()
