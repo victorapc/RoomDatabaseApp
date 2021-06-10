@@ -3,12 +3,14 @@ package com.inux.roomdatabaseapp.fragments.list
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.inux.roomdatabaseapp.R
+import com.inux.roomdatabaseapp.interfacelistener.UpdateClickListener
 import com.inux.roomdatabaseapp.model.User
 import kotlinx.android.synthetic.main.custom_row.view.*
 
-class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
+class ListAdapter(private val listener: UpdateClickListener) : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
     private var userList = emptyList<User>()
 
@@ -24,7 +26,7 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         holder.itemView.idade_txt.text = currentItem.age.toString()
 
         holder.itemView.setOnClickListener {
-
+            listener.usuarioClickedItem(currentItem)
         }
     }
 

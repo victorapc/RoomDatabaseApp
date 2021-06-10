@@ -11,6 +11,10 @@ class UserRepository(private val userDao: UserDao) {
         userDao.addUser(user)
     }
 
+    suspend fun updateUser(user: User){
+        userDao.updateUser(user)
+    }
+
     fun readData(idTable: Int) : LiveData<User> {
         return userDao.readData(idTable)
     }

@@ -37,8 +37,8 @@ class AddFragment : Fragment() {
     }
 
     private fun insertDataToDatabase() {
-        val primeiroNome = updatePrimeiroNome_Et.text.toString()
-        val sobrenome = updateSobrenome_Et.text.toString()
+        val primeiroNome = addPrimeiroNome_Et.text.toString()
+        val sobrenome = addSobrenome_Et.text.toString()
         val idade = addIdade_Et.text
 
         if(inputCkeck(primeiroNome, sobrenome, idade)){
