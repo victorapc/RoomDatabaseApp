@@ -15,6 +15,14 @@ class UserRepository(private val userDao: UserDao) {
         userDao.updateUser(user)
     }
 
+    suspend fun deleteUser(user: User){
+        userDao.deteleUser(user)
+    }
+
+    suspend fun deleteAllUsers(){
+        userDao.deleteAllUsers()
+    }
+
     fun readData(idTable: Int) : LiveData<User> {
         return userDao.readData(idTable)
     }

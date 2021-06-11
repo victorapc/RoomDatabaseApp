@@ -2,11 +2,10 @@ package com.inux.roomdatabaseapp.fragments.list
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -29,21 +28,21 @@ class ListFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_list, container, false)
 
-        // RecylerView
-        val adapter = ListAdapter(object : UpdateClickListener{
-            override fun usuarioClickedItem(item: User) {
-                startActivity(Intent(requireContext(), UpdateActivity::class.java).apply {
-                    putExtra("usuario", item)
-                })
-            }
-        })
-        val recyclerView = view.recyclerview
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
         // ViewModel
         mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         mUserViewModel.readAllData.observe(viewLifecycleOwner, Observer { user ->
+            // RecylerView
+            val adapter = ListAdapter(object : UpdateClickListener{
+                override fun usuarioClickedItem(item: User) {
+                    startActivity(Intent(requireContext(), UpdateActivity::class.java).apply {
+                        putExtra("usuario", item)
+                    })
+                }
+            })
+            val recyclerView = view.recyclerview
+            recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            recyclerView.adapter = adapter
+
             adapter.setData(user)
         })
 
@@ -51,6 +50,36 @@ class ListFragment : Fragment() {
             findNavController().navigate(R.id.action_listFragment_to_addFragment)
         }
 
+        setHasOptionsMenu(true)
+
         return view
+    }
+
+    private fun deleteTodosUsers() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setPositiveButton("Sim"){ _,_ ->
+            mUserViewModel.deleteAllUsers()
+            Toast.makeText(requireContext(),
+                "Todos usuários excluídos com sucesso!",
+                Toast.LENGTH_LONG).show()
+        }
+        builder.setNegativeButton("Não"){ _,_ ->}
+        builder.setTitle("Delete todos usuários?")
+        builder.setMessage("Deseja deletar todos os usuários?")
+        builder.create().show()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.delete_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.menu_delete ->
+                deleteTodosUsers()
+            else-> false
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 }
