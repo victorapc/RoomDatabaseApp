@@ -75,7 +75,7 @@ class UpdateActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             if(!numero.isEmpty()){
                 numeroEndereco = Integer.parseInt(numero.toString())
             }
-            val endereco = Endereco(endereco, numeroEndereco)
+            val endereco = Endereco(endereco, numeroEndereco, "", "")
             // Criando objeto user
             val updatedUser = User(
                 item.id,

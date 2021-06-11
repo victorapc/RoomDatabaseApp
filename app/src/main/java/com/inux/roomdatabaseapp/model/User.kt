@@ -21,5 +21,7 @@ data class User(
 @Parcelize
 data class Endereco(
     val endereco: String,
-    val numero: Int
+    val numero: Int,
+    val bairro: String,
+    val complemento: String
 ) : Parcelable

@@ -49,7 +49,7 @@ class AddFragment : Fragment() {
             if(!numero.isEmpty()){
                 numeroEndereco = Integer.parseInt(numero.toString())
             }
-            val endereco = Endereco(endereco, numeroEndereco)
+            val endereco = Endereco(endereco, numeroEndereco, "", "")
             // Criar objeto do usuário.
             val user = User(0, primeiroNome, sobrenome, Integer.parseInt(idade.toString()), endereco)
             // Adicionar o registro no banco.
