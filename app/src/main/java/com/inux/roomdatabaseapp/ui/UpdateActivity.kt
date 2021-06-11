@@ -5,22 +5,26 @@ import android.text.Editable
 import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.TextView
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.navigation.NavigationView
 import com.inux.roomdatabaseapp.R
+import com.inux.roomdatabaseapp.model.Endereco
 import com.inux.roomdatabaseapp.model.User
 import com.inux.roomdatabaseapp.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.activity_update.*
+import kotlinx.android.synthetic.main.fragment_add.*
 
 class UpdateActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var item: User
-    private lateinit var primeiroNome: TextView
-    private lateinit var sobrenome: TextView
-    private lateinit var idade: TextView
+    private lateinit var primeiroNomeEt: EditText
+    private lateinit var sobrenomeEt: EditText
+    private lateinit var idadeEt: EditText
+    private lateinit var enderecoEt: EditText
+    private lateinit var numeroEt: EditText
 
     private lateinit var mUserViewModel: UserViewModel
 
@@ -39,14 +43,20 @@ class UpdateActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
         mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
-        primeiroNome = updatePrimeiroNome_Et
-        primeiroNome.text = item.firstName
+        primeiroNomeEt = updatePrimeiroNome_Et
+        primeiroNomeEt.setText(item.firstName)
 
-        sobrenome = updateSobrenome_Et
-        sobrenome.text = item.lastName
+        sobrenomeEt = updateSobrenome_Et
+        sobrenomeEt.setText(item.lastName)
 
-        idade = updateIdade_Et
-        idade.text = item.age.toString()
+        idadeEt = updateIdade_Et
+        idadeEt.setText(item.age.toString())
+
+        enderecoEt = updateEndereco_Et
+        enderecoEt.setText(item.endereco.endereco)
+
+        numeroEt = updateNumero_Et
+        numeroEt.setText(item.endereco.numero.toString())
 
         update_btn.setOnClickListener {
             updateItem()
@@ -54,14 +64,25 @@ class UpdateActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     }
 
     private fun updateItem(){
+        val primeiroNome = updatePrimeiroNome_Et.text.toString()
+        val sobrenome = updateSobrenome_Et.text.toString()
+        val idade = updateIdade_Et.text
+        val endereco = updateEndereco_Et.text.toString()
+        val numero = updateNumero_Et.text
 
-        if(inputCkeck(primeiroNome.text.toString(), sobrenome.text.toString(), updateIdade_Et.text)){
+        if(inputCkeck(primeiroNome, sobrenome, idade)){
+            var numeroEndereco = 0
+            if(!numero.isEmpty()){
+                numeroEndereco = Integer.parseInt(numero.toString())
+            }
+            val endereco = Endereco(endereco, numeroEndereco)
             // Criando objeto user
             val updatedUser = User(
                 item.id,
-                primeiroNome.text.toString(),
-                sobrenome.text.toString(),
-                Integer.parseInt(idade.text.toString())
+                primeiroNome,
+                sobrenome,
+                Integer.parseInt(idade.toString()),
+                endereco
             )
             // Atualizando usuário
             mUserViewModel.updateUser(updatedUser)

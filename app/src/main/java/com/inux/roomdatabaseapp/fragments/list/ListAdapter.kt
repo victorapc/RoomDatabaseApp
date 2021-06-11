@@ -24,6 +24,13 @@ class ListAdapter(private val listener: UpdateClickListener) : RecyclerView.Adap
         holder.itemView.primeiroNome_txt.text = currentItem.firstName
         holder.itemView.sobrenome_txt.text = currentItem.lastName
         holder.itemView.idade_txt.text = currentItem.age.toString()
+        holder.itemView.endereco_text.text = currentItem.endereco.endereco
+
+        var numeroEndereco = ""
+        if(currentItem.endereco.numero != 0){
+            numeroEndereco = currentItem.endereco.numero.toString()
+        }
+        holder.itemView.numero_text.text = numeroEndereco
 
         holder.itemView.setOnClickListener {
             listener.usuarioClickedItem(currentItem)

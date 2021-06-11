@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="24dp"
     tools:context=".ui.UpdateActivity">
 
     <EditText
@@ -47,13 +48,41 @@
         tools:layout_editor_absoluteX="100dp"
     />
 
+    <EditText
+        android:id="@+id/updateEndereco_Et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_marginTop="16dp"
+        android:hint="Endereço"
+        app:layout_constraintTop_toBottomOf="@+id/updateIdade_Et"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="100dp"
+    />
+
+    <EditText
+        android:id="@+id/updateNumero_Et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:layout_marginTop="16dp"
+        android:hint="Número"
+        app:layout_constraintTop_toBottomOf="@+id/updateEndereco_Et"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="100dp"
+    />
+
     <Button
         android:id="@+id/update_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Atualizar"
-        app:layout_constraintTop_toBottomOf="@+id/updateIdade_Et"
+        app:layout_constraintTop_toBottomOf="@+id/updateNumero_Et"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteX="135dp"

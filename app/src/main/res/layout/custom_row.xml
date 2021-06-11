@@ -35,6 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Alexandre"
+        android:textAlignment="textStart"
         android:layout_marginStart="10dp"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -52,4 +53,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
     />
+
+    <TextView
+        android:id="@+id/endereco_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        android:text="Rua Antonio Wellerson"
+        app:layout_constraintStart_toStartOf="@+id/primeiroNome_txt"
+        app:layout_constraintTop_toBottomOf="@+id/primeiroNome_txt" />
+
+    <TextView
+        android:id="@+id/numero_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="3dp"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        android:text="923"
+        app:layout_constraintStart_toEndOf="@+id/endereco_text"
+        app:layout_constraintTop_toBottomOf="@+id/sobrenome_txt" />
 </androidx.constraintlayout.widget.ConstraintLayout>

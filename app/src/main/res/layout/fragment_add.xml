@@ -48,13 +48,41 @@
         tools:layout_editor_absoluteX="100dp"
     />
 
+    <EditText
+        android:id="@+id/addEndereco_Et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_marginTop="16dp"
+        android:hint="Endereço"
+        app:layout_constraintTop_toBottomOf="@+id/addIdade_Et"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="100dp"
+    />
+
+    <EditText
+        android:id="@+id/addNumero_Et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:layout_marginTop="16dp"
+        android:hint="Número"
+        app:layout_constraintTop_toBottomOf="@+id/addEndereco_Et"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="100dp"
+    />
+
     <Button
         android:id="@+id/add_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Adicionar"
-        app:layout_constraintTop_toBottomOf="@+id/addIdade_Et"
+        app:layout_constraintTop_toBottomOf="@+id/addNumero_Et"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteX="135dp"

@@ -1,6 +1,7 @@
 package com.inux.roomdatabaseapp.model
 
 import android.os.Parcelable
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
@@ -12,5 +13,13 @@ data class User(
     val id: Int,
     val firstName: String,
     val lastName: String,
-    val age: Int
+    val age: Int,
+    @Embedded
+    val endereco: Endereco
+) : Parcelable
+
+@Parcelize
+data class Endereco(
+    val endereco: String,
+    val numero: Int
 ) : Parcelable

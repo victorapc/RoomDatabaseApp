@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.inux.roomdatabaseapp.R
+import com.inux.roomdatabaseapp.model.Endereco
 import com.inux.roomdatabaseapp.model.User
 import com.inux.roomdatabaseapp.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.fragment_add.*
@@ -40,10 +41,17 @@ class AddFragment : Fragment() {
         val primeiroNome = addPrimeiroNome_Et.text.toString()
         val sobrenome = addSobrenome_Et.text.toString()
         val idade = addIdade_Et.text
+        val endereco = addEndereco_Et.text.toString()
+        val numero = addNumero_Et.text
 
         if(inputCkeck(primeiroNome, sobrenome, idade)){
+            var numeroEndereco = 0
+            if(!numero.isEmpty()){
+                numeroEndereco = Integer.parseInt(numero.toString())
+            }
+            val endereco = Endereco(endereco, numeroEndereco)
             // Criar objeto do usuário.
-            val user = User(0, primeiroNome, sobrenome, Integer.parseInt(idade.toString()))
+            val user = User(0, primeiroNome, sobrenome, Integer.parseInt(idade.toString()), endereco)
             // Adicionar o registro no banco.
             mUserViewModel.addUser(user)
 
