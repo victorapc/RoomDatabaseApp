@@ -3,6 +3,7 @@ package com.inux.roomdatabaseapp.data.user
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.inux.roomdatabaseapp.model.User
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface UserDao {
@@ -23,4 +24,7 @@ interface UserDao {
 
     @Query("SELECT * FROM user_table WHERE(id = :idTable)")
     fun readData(idTable: Int): LiveData<User>
+
+    @Query("SELECT * FROM user_table WHERE(firstName LIKE :searchQuery OR lastName LIKE :searchQuery)")
+    fun searchDataBase(searchQuery: String) : Flow<List<User>>
 }

@@ -3,6 +3,7 @@ package com.inux.roomdatabaseapp.fragments.list
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -13,13 +14,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.inux.roomdatabaseapp.R
 import com.inux.roomdatabaseapp.interfacelistener.UpdateClickListener
 import com.inux.roomdatabaseapp.model.User
+import com.inux.roomdatabaseapp.ui.MainActivity
 import com.inux.roomdatabaseapp.ui.UpdateActivity
 import com.inux.roomdatabaseapp.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.fragment_list.view.*
 
-class ListFragment : Fragment() {
+class ListFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private lateinit var mUserViewModel: UserViewModel
+    private lateinit var adapter : ListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +35,7 @@ class ListFragment : Fragment() {
         mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         mUserViewModel.readAllData.observe(viewLifecycleOwner, Observer { user ->
             // RecylerView
-            val adapter = ListAdapter(object : UpdateClickListener{
+            adapter = ListAdapter(object : UpdateClickListener{
                 override fun usuarioClickedItem(item: User) {
                     startActivity(Intent(requireContext(), UpdateActivity::class.java).apply {
                         putExtra("usuario", item)
@@ -70,7 +73,14 @@ class ListFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.delete_menu, menu)
+        inflater.inflate(R.menu.main_menu, menu)
+
+        val searchView = SearchView((context as MainActivity).supportActionBar?.themedContext ?: context)
+        menu?.findItem(R.id.menu_search).apply {
+            actionView = searchView
+        }
+        searchView?.isSubmitButtonEnabled = true
+        searchView?.setOnQueryTextListener(this)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -81,5 +91,29 @@ class ListFragment : Fragment() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun searchDataBase(query: String){
+        val searchQuery = "%$query%"
+
+        mUserViewModel.searchDataBase(searchQuery).observe(this, { list ->
+            list.let {
+                adapter.setData(it)
+            }
+        })
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        if(query != null){
+            searchDataBase(query)
+        }
+        return true
+    }
+
+    override fun onQueryTextChange(query: String?): Boolean {
+        if(query != null){
+            searchDataBase(query)
+        }
+        return true
     }
 }

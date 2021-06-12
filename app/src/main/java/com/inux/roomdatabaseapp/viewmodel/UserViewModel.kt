@@ -3,11 +3,13 @@ package com.inux.roomdatabaseapp.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.inux.roomdatabaseapp.data.user.UserDatabase
 import com.inux.roomdatabaseapp.repository.UserRepository
 import com.inux.roomdatabaseapp.model.User
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class UserViewModel(application: Application): AndroidViewModel(application) {
@@ -42,6 +44,10 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteAllUsers()
         }
+    }
+
+    fun searchDataBase(searchQuery: String) : LiveData<List<User>>{
+        return repository.searchDataBase(searchQuery).asLiveData()
     }
 
     fun readUser(idTable: Int) : LiveData<User>{
