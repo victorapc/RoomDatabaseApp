@@ -32,8 +32,12 @@ class ListAdapter(private val listener: UpdateClickListener) : RecyclerView.Adap
         }
         holder.itemView.numero_text.text = numeroEndereco
 
-        holder.itemView.setOnClickListener {
+        /*holder.itemView.setOnClickListener {
             listener.usuarioClickedItem(currentItem)
+        }*/
+        holder.itemView.rowLayout.setOnClickListener {
+            val action = ListFragmentDirections.actionListFragmentToUpdateFragment2(currentItem)
+            holder.itemView.findNavController().navigate(action)
         }
     }
 

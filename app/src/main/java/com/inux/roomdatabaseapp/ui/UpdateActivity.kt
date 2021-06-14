@@ -124,6 +124,7 @@ class UpdateActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
+        //menu?.findItem(0)?.isVisible = false
         return super.onCreateOptionsMenu(menu)
     }
 
